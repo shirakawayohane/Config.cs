@@ -19,7 +19,7 @@ namespace TypedConfig.CLI
             TestClass.value2 = "def";
             TestClass.alphabet = Alphabet.C;
             TestClass.ChildClass.value = 1.5f;
-            TestClass.ChildClass.GrancChildClass.message = "みよーん";
+            TestClass.ChildClass.GrancChildClass.message = "みよーん.";
             serialized = serializer.Serialize();
             Console.WriteLine(System.Text.Encoding.UTF8.GetString(serialized));
         }

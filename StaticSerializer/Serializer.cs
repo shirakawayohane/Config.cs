@@ -88,7 +88,7 @@ namespace TypedConfig.Serialization
                 writer.WriteValueSeparator();
             }
             var subClasses = _type.GetNestedTypes(_option.BindingFlags);
-            if(subClasses.Length > 0)
+            if(subClasses.Length > 0 && fields.Length > 0)
             {
                 writer.WriteValueSeparator();
             }
