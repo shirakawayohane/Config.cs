@@ -1,7 +1,9 @@
 ﻿using System;
-using TypedConfig.Serialization;
+using Config.cs;
 using System.Reflection;
-namespace TypedConfig.CLI
+using Config.cs;
+
+namespace Config.CLI
 {
     class Program
     {
@@ -20,6 +22,15 @@ namespace TypedConfig.CLI
             TestClass.alphabet = Alphabet.C;
             TestClass.ChildClass.value = 1.5f;
             TestClass.ChildClass.GrancChildClass.message = "みよーん.";
+            serialized = serializer.Serialize();
+            Console.WriteLine(System.Text.Encoding.UTF8.GetString(serialized));
+            TestClass.value1 = 5;
+            TestClass.value2 = "abc";
+            TestClass.alphabet = Alphabet.B;
+            TestClass.ChildClass.value = 3.141592653589793238462643383279f;
+            var serialized2 = serializer.Serialize();
+            Console.WriteLine(System.Text.Encoding.UTF8.GetString(serialized2));
+            serializer.Deserialize(serialized);
             serialized = serializer.Serialize();
             Console.WriteLine(System.Text.Encoding.UTF8.GetString(serialized));
         }

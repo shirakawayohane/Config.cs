@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 
-namespace TypedConfig.Serialization
+namespace Config.cs
 {
     public class SerializeOption
     {

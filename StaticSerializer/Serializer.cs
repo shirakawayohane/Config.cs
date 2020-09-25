@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using Utf8Json;
 
-namespace TypedConfig.Serialization
+namespace Config.cs
 {
     public class Serializer
     {
