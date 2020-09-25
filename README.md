@@ -56,3 +56,8 @@ var data = serializer.Serialize();
 //byte[] -> directory write to static class
 serializer.Deserialize();
 ```
+
+## Special Thanks
+Thanks to [Utf8Json](https://github.com/neuecc/Utf8Json) library, the development was smooth, and thic package made stable and fast.
+
+Thanks to author of Utf8Json, [neuecc](https://github.com/neuecc/)
