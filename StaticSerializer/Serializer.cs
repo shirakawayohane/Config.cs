@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using Utf8Json;
 
 namespace Config.cs
@@ -24,7 +25,12 @@ namespace Config.cs
         public byte[] Serialize()
         {
             var writer = new JsonWriter();
-            return serialize(ref writer);
+            var ret = serialize(ref writer);
+            if(_option.PrettyPrint)
+            {
+                ret = System.Text.Encoding.UTF8.GetBytes(JsonSerializer.PrettyPrint(ret));
+            }
+            return ret;
         }
         private byte[] serialize(ref JsonWriter writer)
         {
