@@ -1,0 +1,29 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Pack and publish nuget package
+
+# Controls when the action will run. 
+on:
+  push:
+    branches-ignore:
+      - '**'
+    tags:
+      - 'v*'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    if: "!(contains(github.event.head_commit.message, '[skip ci]'))"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.202
+    - name: Build
+      run: dotnet build ./src/Config.cs.csproj --configuration Release
+    - name: Pack
+      run: dotnet pack ./src/Config.cs.csproj --output ./artifacts --configuration Release
+    - name: Publish
+      run: dotnet nuget push ./artifacts/$(ls ./artifacts | grep .nupkg) --skip-duplicate -s https://api.nuget.org/v3/index.json -k ${{secrets.NUGET_API_KEY}}
