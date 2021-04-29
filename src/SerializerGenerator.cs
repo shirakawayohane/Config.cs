@@ -8,7 +8,7 @@ using Utf8Json;
 
 namespace Config.cs
 {
-    internal class FormatterGenerator
+    internal class SerializerGenerator
     {
         static AssemblyBuilder assembly { get; } = AssemblyBuilder.DefineDynamicAssembly(new System.Reflection.AssemblyName("Hoge"),
             AssemblyBuilderAccess.Run);
@@ -43,19 +43,11 @@ namespace Config.cs
             sil.Emit(OpCodes.Ldloca_S, 0); //1
             sil.Emit(OpCodes.Call, FromStatic); // 0 this.FromStatic();
 
-            //sil.Emit(OpCodes.Ldc_I4_2); //1
-            //sil.Emit(OpCodes.Newarr, typeof(byte)); //0
-            //sil.Emit(OpCodes.Ret); //試してみたらここまではOKだった。
-
             sil.Emit(OpCodes.Ldloc_0, 0); //1
             sil.Emit(OpCodes.Ldarg_0); //2
             sil.Emit(OpCodes.Call, serializeMethodInfo); //1
             sil.Emit(OpCodes.Ret); //0
-            /*
-             * var instance = new InstanceType();
-             * instance.FromStatic();
-             * return JsonSerializer.Serialize(instance);
-             */
+
             Serializers.Add(staticType, (Func<IJsonFormatterResolver, byte[]>)serializer.CreateDelegate(typeof(Func<IJsonFormatterResolver, byte[]>)));
 
             var deserializeMethodInfo = typeof(JsonSerializer).GetMethods()
@@ -79,7 +71,6 @@ namespace Config.cs
         private static (TypeInfo, MethodInfo, MethodInfo) CreateInstanceType(Type staticType)
         {
 
-            bool first = true;
             return BuildRec(staticType);
             (TypeInfo, MethodInfo, MethodInfo) BuildRec(Type sType)
             {

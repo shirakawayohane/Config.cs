@@ -27,7 +27,7 @@ public static class TestClass
 {
     public static int value1 = 1;
     public static string value2 = "abc";
-    //public static Alphabet alphabet = Alphabet.B;
+    public static Alphabet alphabet = Alphabet.B;
     public static int[] arr = new[] { 1, 2, 3, 4 };
 
     public static class ChildClass

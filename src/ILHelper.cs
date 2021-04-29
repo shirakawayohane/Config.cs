@@ -8,8 +8,6 @@ namespace Config.cs
 {
     public static class ILHelper
     {
-
-        // こういうヘルパーメソッド用意しておくと便利
         public static void EmitPop(this ILGenerator il, int count)
         {
             for (int i = 0; i < count; i++)

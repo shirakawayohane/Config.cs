@@ -3,10 +3,10 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<PackageId>Config.cs</PackageId>
-		<Authors>WiZ3910</Authors>
+		<Authors>WiZLite</Authors>
 		<Company>FOURDESIGN, LLC</Company>
 		<Product>Config.cs</Product>
-		<Version>2.0.0</Version>
+		<Version>2.0.1</Version>
 		<Description>
 			This helps you to serialize static class.
 			Including Nested Class, you will be able to serialize/deserialize to and from byte array.

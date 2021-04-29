@@ -27,12 +27,12 @@ namespace Config.cs
             {
                 this.resolver = resolver;
             }
-            if (FormatterGenerator.Serializers.ContainsKey(staticType) == false)
+            if (SerializerGenerator.Serializers.ContainsKey(staticType) == false)
             {
-                FormatterGenerator.CreateMethod(staticType);
+                SerializerGenerator.CreateMethod(staticType);
             }
-            this.serializer = FormatterGenerator.Serializers[staticType];
-            this.deserializer = FormatterGenerator.Deserializers[staticType];
+            this.serializer = SerializerGenerator.Serializers[staticType];
+            this.deserializer = SerializerGenerator.Deserializers[staticType];
         }
         public byte[] Save()
         {
