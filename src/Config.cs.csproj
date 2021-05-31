@@ -6,7 +6,7 @@
 		<Authors>WiZLite</Authors>
 		<Company>FOURDESIGN, LLC</Company>
 		<Product>Config.cs</Product>
-		<Version>2.0.1</Version>
+		<Version>2.1.0</Version>
 		<Description>
 			This helps you to serialize static class.
 			Including Nested Class, you will be able to serialize/deserialize to and from byte array.
