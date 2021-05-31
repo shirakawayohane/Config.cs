@@ -2,6 +2,7 @@
 using Config.cs;
 using System.Reflection;
 using Config.cs;
+using System.Text.RegularExpressions;
 
 class Program
 {
@@ -20,6 +21,19 @@ class Program
 
         serializer.Load(data);
 
+        var json = serializer.SaveJson();
+
+        Console.WriteLine("Saved json : " + json);
+
+        json = Regex.Replace(json, @"""value1"":1", @"""value1"":10");
+        json = Regex.Replace(json, @"""value2"":""abc""", @"""value2"":""def""");
+
+        serializer.LoadJson(json);
+
+        var json2 = serializer.SaveJson(true);
+
+        Console.WriteLine("Changed from json and prettify : " + json2);
+
 
     }
 }
@@ -29,7 +43,6 @@ public static class TestClass
     public static string value2 = "abc";
     public static Alphabet alphabet = Alphabet.B;
     public static int[] arr = new[] { 1, 2, 3, 4 };
-
     public static class ChildClass
     {
         public static float value = 1;
