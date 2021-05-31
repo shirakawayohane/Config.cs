@@ -12,6 +12,9 @@ dotnet add package Config.cs --version 2.0.1
 For the flexibility and performance and maintanance reasons, Public API has drastically changed from v1.0^.
 Please note that there is no compatibility between v1 and v2.
 
+This library use dynamic code generation for flexibility, which means this lib cannot be used in AOT environment (e.g. IL2CPP of Unity)
+But, feel free to send PRs or issues. Contribution is welcome.
+
 ## Quick Start
 Usage is very simple.
 Suppose that you want to perpetuate static class like this.
