@@ -75,11 +75,6 @@ namespace Config.cs
             (TypeInfo, MethodInfo, MethodInfo) BuildRec(Type sType)
             {
                 var attributes = TypeAttributes.Public | TypeAttributes.SequentialLayout | TypeAttributes.AnsiClass | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit;
-                //if (!first)
-                //{
-                //    attributes = TypeAttributes.NestedPublic | TypeAttributes.SequentialLayout | TypeAttributes.AnsiClass | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit;
-                //}
-                //first = false;
                 var name = sType.Name + "Instance";
                 var typeBuilder = module.DefineType(sType.Name + "Instance", attributes, typeof(ValueType));
                 var fromStatic = typeBuilder.DefineMethod("FromStatic", MethodAttributes.Public);
@@ -95,14 +90,12 @@ namespace Config.cs
                         fromStaticIL.Emit(OpCodes.Ldarg_0); //1
                         fromStaticIL.Emit(OpCodes.Ldsfld, field); //1
                         fromStaticIL.Emit(OpCodes.Stfld, df); //0
-                        // this.Field = StaticClass.Field
                     }
 
                     {
                         toStaticIL.Emit(OpCodes.Ldarg_0); //1
                         toStaticIL.Emit(OpCodes.Ldfld, df); //1
                         toStaticIL.Emit(OpCodes.Stsfld, field); //0
-                        //StaticClass.Field = this.Field
                     }
                 }
                 foreach (var nt in sType.GetNestedTypes().Except(new[] { sType }))
@@ -111,10 +104,6 @@ namespace Config.cs
                     var df = typeBuilder.DefineField(nt.Name, type, FieldAttributes.Public);
 
                     {
-                        //fromStaticIL.Emit(OpCodes.Ldarg_0); //1
-                        //fromStaticIL.Emit(OpCodes.Ldflda, df); //2
-                        //fromStaticIL.Emit(OpCodes.Initobj, type); //1
-                        //fromStaticIL.Emit(OpCodes.Stfld, df); //0 this.Field = new FieldType();
                         fromStaticIL.Emit(OpCodes.Ldarg_0); //1
                         fromStaticIL.Emit(OpCodes.Ldflda, df); //1
                         fromStaticIL.Emit(OpCodes.Call, fst); //0
