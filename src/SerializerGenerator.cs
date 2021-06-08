@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection.Emit;
@@ -75,6 +75,7 @@ namespace Config.cs
             (TypeInfo, MethodInfo, MethodInfo) BuildRec(Type sType)
             {
                 var attributes = TypeAttributes.Public | TypeAttributes.SequentialLayout | TypeAttributes.AnsiClass | TypeAttributes.Sealed | TypeAttributes.BeforeFieldInit;
+
                 var name = sType.Name + "Instance";
                 var typeBuilder = module.DefineType(sType.Name + "Instance", attributes, typeof(ValueType));
                 var fromStatic = typeBuilder.DefineMethod("FromStatic", MethodAttributes.Public);
@@ -90,12 +91,14 @@ namespace Config.cs
                         fromStaticIL.Emit(OpCodes.Ldarg_0); //1
                         fromStaticIL.Emit(OpCodes.Ldsfld, field); //1
                         fromStaticIL.Emit(OpCodes.Stfld, df); //0
+                        // this.Field = StaticClass.Field
                     }
 
                     {
                         toStaticIL.Emit(OpCodes.Ldarg_0); //1
                         toStaticIL.Emit(OpCodes.Ldfld, df); //1
                         toStaticIL.Emit(OpCodes.Stsfld, field); //0
+                        // StaticClass.Field = this.Field
                     }
                 }
                 foreach (var nt in sType.GetNestedTypes().Except(new[] { sType }))
